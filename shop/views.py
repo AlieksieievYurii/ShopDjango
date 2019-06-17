@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import HttpResponseRedirect
 from . import models
 # Create your views here.
 def index(request):
@@ -23,7 +24,8 @@ def add_to_cart(request, goods_id: int):
 
 def remove_from_cart(request, goods_id: int):
 	g = models.Goods.objects.get(id=goods_id)
-	cart = models.Cart.objects(goods=q)
+
+	cart = models.Cart.objects.get(goods=g)
 	cart.delete()
 	return HttpResponseRedirect('/open_cart/')
 
@@ -51,8 +53,10 @@ def order(request):
 
 
 def categories(request, categories_id: int):
+	c = models.Categories.objects,get(id=categories_id)
+	g = models.Goods.objects.filter(category=c)
+	# Implement categories
 	pass
-
 
 def about(request):
 	pass
