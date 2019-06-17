@@ -1,42 +1,27 @@
 {% extends "shop/base_template.html" %}
 
 {% block content %}
-{% for item in goods %}
-	<h1>{{item.name}}</h1>
-{% endfor %}
-<div class="container">
-  <div class="row">
-    <div class="col-md-4">
+<div>
+  <div class="product__container">
+    {% for item in goods %}
+      <div class="product__card">
         <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src=".../100px180/" alt="Product photo">
-            <div class="card-body">
-                <h5 class="card-title">Product Name</h5>
-                <p class="card-text">Product desctiption</p>
-                <a href="#" class="btn btn-primary">Add to card</a>
+          <img class="card-img-top" src={{item.img}} alt="Product photo">
+          <div class="product__card__title">
+            <h5 class="card-title">{{item.name}}</h5>
+            <p class="card-text">{{item.description}}</p>
+            <a href="#" class="btn btn-outline-secondary btn-sm">Show details</a>
+
+            <div class="product__card__add">
+             <p>${{item.price}}</p>
+              <form action='actionUrl' method='GET'>
+                <button class="btn btn-primary" type='submit'>Add to card</button>
+              </form>
             </div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="product__card">
-      <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src=".../100px180/" alt="Product photo">
-        <div class="card-body">
-          <h5 class="card-title">Product Name</h5>
-          <p class="card-text">Product desctiption</p>
-          <a href="#" class="btn btn-primary">Add to card</a>
-        </div>
-      </div>
-    </div>
-    <div class="product__card">
-      <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src=".../100px180/" alt="Product photo">
-        <div class="card-body">
-          <h5 class="card-title">Product Name</h5>
-          <p class="card-text">Product desctiption</p>
-          <a href="#" class="btn btn-primary">Add to card</a>
-        </div>
-      </div>
-    </div>
+    {% endfor %}  
   </div>
 </div>
 

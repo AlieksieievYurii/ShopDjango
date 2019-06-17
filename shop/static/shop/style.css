@@ -177,3 +177,18 @@ a.article:hover {
 .product__card {
     margin-bottom: 24px;
 }
+.product__card__title {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 15px;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: start;
+
+}
+.product__card__add {
+    /* margin: 10px; */
+}
+.product__card__add p {
+    margin: 0;
+}
