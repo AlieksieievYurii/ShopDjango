@@ -167,3 +167,13 @@ a.article:hover {
         display: none;
     }
 }
+
+.product__container {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.product__card {
+    margin-bottom: 24px;
+}
