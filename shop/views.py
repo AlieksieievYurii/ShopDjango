@@ -4,12 +4,11 @@ from . import models
 # Create your views here.
 def index(request):
 	goods = models.Goods.objects.order_by('?')
-	title = 'Index'
 	categories = models.Categories.objects.all()
 	count_goods_in_cart = models.Cart.objects.all().count()
 	content = {
 		'goods': goods,
-		'title': title,
+		'title': 'Index',
 		'categories': categories,
 		'count_goods_in_cart': count_goods_in_cart
 	}
@@ -17,8 +16,9 @@ def index(request):
 
 
 def add_to_cart(request, goods_id: int):
-	g = models.Goods.objects.get(id=goods_id)
-	models.Cart.objects.Create(goods=g, count=1)
+	if request.method == 'POST':
+		g = models.Goods.objects.get(id=goods_id)
+		models.Cart.objects.create(goods=g, count=1)
 	return HttpResponseRedirect('/index/')
 
 
@@ -53,10 +53,17 @@ def order(request):
 
 
 def categories(request, categories_id: int):
-	c = models.Categories.objects,get(id=categories_id)
-	g = models.Goods.objects.filter(category=c)
-	# Implement categories
-	pass
+	c = models.Categories.objects.get(id=categories_id)
+	goods = models.Goods.objects.filter(category=c)
+	categories = models.Categories.objects.all()
+	count_goods_in_cart = models.Cart.objects.all().count()
+	content = {
+		'goods': goods,
+		'title': c.name,
+		'categories': categories,
+		'count_goods_in_cart': count_goods_in_cart
+	}
+	return render(request, 'shop/index.html', context=content)
 
 def about(request):
 	pass
