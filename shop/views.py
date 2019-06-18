@@ -44,8 +44,8 @@ def detail(request, goods_id: int):
 	return render(request, 'shop/detail.html', context=content)
 
 
-def open_cart(request):
-	pass
+def cart(request):
+	return render(request, 'shop/cart.html', context=None)
 
 
 def order(request):
