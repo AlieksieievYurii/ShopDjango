@@ -34,21 +34,11 @@
                 <li class="active">
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Categories</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
-                        <li>
-                            <a href="#">Transistors</a>
+                        {% for category in categories %}
+                            <li>
+                            <a href="/categories/{{category.id}}">{{category.name}}</a>
                         </li>
-                        <li>
-                            <a href="#">Capasity</a>
-                        </li>
-                        <li>
-                            <a href="#">Resistors</a>
-                        </li>
-                        <li>
-                            <a href="#">Diodes</a>
-                        </li>
-                        <li>
-                            <a href="#">Motors</a>
-                        </li>
+                        {% endfor %}
                     </ul>
                 </li>
                 <li>
