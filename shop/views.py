@@ -3,14 +3,11 @@ from django.http import HttpResponseRedirect
 from . import models
 # Create your views here.
 def index(request):
-	goods = models.Product.objects.order_by('?')
-	categories = models.Category.objects.all()
-	count_goods_in_cart = models.Cart.objects.all().count()
 	content = {
-		'goods': goods,
+		'goods': models.Product.objects.order_by('?'),
 		'title': 'Index',
-		'categories': categories,
-		'count_goods_in_cart': count_goods_in_cart
+		'categories': models.Category.objects.all(),
+		'count_goods_in_cart': models.Cart.objects.all().count()
 	}
 	return render(request, 'shop/index.html', context=content)
 
@@ -39,6 +36,7 @@ def detail(request, goods_id: int):
 		'product_count': g.available_count,
 		'price': g.price,
 		'img_url': g.img,
+		'categories': models.Category.objects.all(),
 		'category': g.category.name
 	}
 	return render(request, 'shop/detail.html', context=content)
