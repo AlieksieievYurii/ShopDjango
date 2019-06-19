@@ -68,4 +68,4 @@ def about(request):
 
 
 def contact(request):
-	pass
+	return render(request, 'shop/contacts.html', context=None)
