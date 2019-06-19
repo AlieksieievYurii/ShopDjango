@@ -10,5 +10,5 @@ urlpatterns = [
 	path('order/', views.order),
 	path('categories/<int:categories_id>/', views.categories),
 	path('about/', views.about),
-	path('contact/', views.contact)
+	path('contacts/', views.contacts)
 ]

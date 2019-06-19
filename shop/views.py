@@ -67,5 +67,5 @@ def about(request):
 	return render(request, 'shop/about.html', context=None)
 
 
-def contact(request):
+def contacts(request):
 	return render(request, 'shop/contacts.html', context=None)
