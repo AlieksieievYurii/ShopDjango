@@ -64,7 +64,7 @@ def categories(request, categories_id: int):
 	return render(request, 'shop/index.html', context=content)
 
 def about(request):
-	pass
+	return render(request, 'shop/about.html', context=None)
 
 
 def contact(request):
