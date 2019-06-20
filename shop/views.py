@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from . import models
+from django.core.exceptions import ObjectDoesNotExist
 # Create your views here.
 
 def get_products(request, categories_id=None):
