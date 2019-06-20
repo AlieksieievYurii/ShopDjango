@@ -49,16 +49,10 @@ def remove_from_cart(request, goods_id: int):
 
 
 def detail(request, goods_id: int):
-	g = models.Product.objects.get(id=goods_id)
+	product = models.Product.objects.get(id=goods_id)
 	content = {
 		'title': 'Details',
-		'product_name': g.name,
-		'product_description': g.description,
-		'product_count': g.available_count,
-		'price': g.price,
-		'img_url': g.img,
-		'categories': models.Category.objects.all(),
-		'category': g.category.name
+		'product': product
 	}
 	return render(request, 'shop/detail.html', context=content)
 
