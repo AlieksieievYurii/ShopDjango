@@ -70,7 +70,11 @@
                     </button>
                    
                         <div style="display: inline">
-                            <h4>cart is empty</h4>
+                            {% if count_goods_in_cart %}
+                                <h4>{{ count_goods_in_cart }} items</h4>
+                            {% else %}
+                                <h4>cart is empty</h4>
+                            {% endif %}
                             <form action="/cart/" method="GET" class="btn">
                                 <input type="submit" name="Cart" value="Cart"> 
                             </form>

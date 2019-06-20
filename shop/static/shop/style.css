@@ -197,3 +197,9 @@ a.article:hover {
 .product__card__add p {
     margin: 0;
 }
+
+.cart_item
+{
+    background-color: yellow;
+    display: inline;
+}

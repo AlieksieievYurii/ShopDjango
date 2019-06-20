@@ -48,10 +48,12 @@ def remove_from_cart(request, goods_id: int):
 
 
 def detail(request, goods_id: int):
-	product = models.Product.objects.get(id=goods_id)
 	content = {
 		'title': 'Details',
-		'product': product
+		'product': models.Product.objects.get(id=goods_id),
+		'categories': models.Category.objects.all(),
+		'count_goods_in_cart': models.Cart.objects.all().count(),
+		'category': models.Product.objects.get(id=goods_id).category.name
 	}
 	return render(request, 'shop/detail.html', context=content)
 
@@ -69,7 +71,8 @@ def cart(request):
 	return render(request, 'shop/cart.html', context={
 		'products': items_cart, 
 		'summa': summa, 
-		'categories': models.Category.objects.all()})
+		'categories': models.Category.objects.all(),
+		'count_goods_in_cart': models.Cart.objects.all().count()})
 
 
 def order(request):
@@ -80,8 +83,8 @@ def categories(request, categories_id: int):
 	return get_products(request, categories_id)
 
 def about(request):
-	return render(request, 'shop/about.html', context=None)
+	return render(request, 'shop/about.html', context={'count_goods_in_cart': models.Cart.objects.all().count()})
 
 
 def contacts(request):
-	return render(request, 'shop/contacts.html', context=None)
+	return render(request, 'shop/contacts.html', context={'count_goods_in_cart': models.Cart.objects.all().count()})
