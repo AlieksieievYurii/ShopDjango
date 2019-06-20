@@ -4,8 +4,6 @@ from . import models
 # Create your views here.
 
 def get_products(request, categories_id=None):
-	categories = models.Category.objects.all()
-	count_goods_in_cart = models.Cart.objects.all().count()
 	products = None
 	category = None
 	if categories_id is not None:
@@ -17,8 +15,8 @@ def get_products(request, categories_id=None):
 		'goods': products,
 		'title': category.name if category else 'Shop',
 		'category': category.name if category else None,
-		'categories': categories,
-		'count_goods_in_cart': count_goods_in_cart
+		'categories': models.Category.objects.all(),
+		'count_goods_in_cart': models.Cart.objects.all().count()
 	}
 
 	return render(request, 'shop/index.html', context=content)
@@ -31,11 +29,11 @@ def index(request):
 def add_to_cart(request, goods_id: int):
 	if request.method == 'POST':
 		product = models.Product.objects.get(id=goods_id)
-		product_from_car = models.Cart.objects.filter(product=product)
-		if product_from_car.count():
-			product_from_car.count = product_from_car.count + 1
-			product_from_car.save() 
-		else:
+		try:
+			product_from_car = models.Cart.objects.get(product=product)
+			product_from_car.count += 1
+			product_from_car.save()
+		except ObjectDoesNotExist:
 			models.Cart.objects.create(product=product, count=1)
 	return HttpResponseRedirect('/index/')
 
@@ -67,7 +65,10 @@ def cart(request):
 			'product': item,
 			'price_for_all': summa_items
 			})
-	return render(request, 'shop/cart.html', context={'products': items_cart, 'summa': summa})
+	return render(request, 'shop/cart.html', context={
+		'products': items_cart, 
+		'summa': summa, 
+		'categories': models.Category.objects.all()})
 
 
 def order(request):
