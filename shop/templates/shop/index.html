@@ -3,6 +3,10 @@
 {% block content %}
 <div>
   <div class="product__container">
+    {% if category %}
+      <h1>{{category}}</h1>
+      <br>
+    {% endif %}
     {% for item in goods %}
       <div class="product__card">
         <div class="card" style="width: 18rem;">
@@ -15,7 +19,8 @@
             </form>
             <div class="product__card__add">
              <p>${{item.price}}</p>
-              <form action="/add_to_cart/{{item.id}}" method='POST'>
+              <form action="/add_to_cart/{{item.id}}/" method='POST'>
+                {% csrf_token %}
                 <button class="btn btn-primary" type='submit'>Add to card</button>
               </form>
             </div>
