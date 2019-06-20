@@ -58,7 +58,16 @@ def detail(request, goods_id: int):
 
 
 def cart(request):
-	return render(request, 'shop/cart.html', context=None)
+	items_cart = []
+	summa = 0
+	for item in models.Cart.objects.all():
+		summa_items = item.count * item.product.price
+		summa += summa_items
+		items_cart.append({
+			'product': item,
+			'price_for_all': summa_items
+			})
+	return render(request, 'shop/cart.html', context={'products': items_cart, 'summa': summa})
 
 
 def order(request):

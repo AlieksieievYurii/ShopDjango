@@ -1,4 +1,18 @@
 {% extends "shop/base_template.html" %}
+{% load static %}
 {% block content %}
 <h1>Cart</h1>
+{% for item in products %}
+	<div class="cart_item" style="display: inline-block;">
+		<img src="{% static 'shop/img/' %}{{ item.product.product.img }}" width="10%" height="10%">
+		<h3>{{ item.product.product.name }}</h3>
+		<h4>Count:{{ item.product.count }}</h4>
+		<h4>Price for one: {{ item.product.product.price }}</h4>
+		<h4>Price for {{ item.count }}: {{ item.price_for_all }}</h4>
+	</div>
+{% endfor %}
+
+<div>
+	<p>Summa:{{ summa }}</p>
+</div>
 {% endblock content %}
