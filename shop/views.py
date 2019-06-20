@@ -2,20 +2,41 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from . import models
 # Create your views here.
-def index(request):
+
+def get_products(request, categories_id=None):
+	categories = models.Category.objects.all()
+	count_goods_in_cart = models.Cart.objects.all().count()
+	products = None
+	category = None
+	if categories_id is not None:
+		category = models.Category.objects.get(id=categories_id)
+		products = models.Product.objects.filter(category=category)
+	else:
+		products = models.Product.objects.order_by('?')
 	content = {
-		'goods': models.Product.objects.order_by('?'),
-		'title': 'Index',
-		'categories': models.Category.objects.all(),
-		'count_goods_in_cart': models.Cart.objects.all().count()
+		'goods': products,
+		'title': category.name if category else 'Shop',
+		'category': category.name if category else None,
+		'categories': categories,
+		'count_goods_in_cart': count_goods_in_cart
 	}
+
 	return render(request, 'shop/index.html', context=content)
+
+
+def index(request):
+	return get_products(request)
 
 
 def add_to_cart(request, goods_id: int):
 	if request.method == 'POST':
-		g = models.Product.objects.get(id=goods_id)
-		models.Cart.objects.create(goods=g, count=1)
+		product = models.Product.objects.get(id=goods_id)
+		product_from_car = models.Cart.objects.filter(product=product)
+		if product_from_car.count():
+			product_from_car.count = product_from_car.count + 1
+			product_from_car.save() 
+		else:
+			models.Cart.objects.create(product=product, count=1)
 	return HttpResponseRedirect('/index/')
 
 
@@ -30,7 +51,7 @@ def remove_from_cart(request, goods_id: int):
 def detail(request, goods_id: int):
 	g = models.Product.objects.get(id=goods_id)
 	content = {
-		'title': 'Detail',
+		'title': 'Details',
 		'product_name': g.name,
 		'product_description': g.description,
 		'product_count': g.available_count,
@@ -51,17 +72,7 @@ def order(request):
 
 
 def categories(request, categories_id: int):
-	c = models.Category.objects.get(id=categories_id)
-	goods = models.Product.objects.filter(category=c)
-	categories = models.Category.objects.all()
-	count_goods_in_cart = models.Cart.objects.all().count()
-	content = {
-		'goods': goods,
-		'title': c.name,
-		'categories': categories,
-		'count_goods_in_cart': count_goods_in_cart
-	}
-	return render(request, 'shop/index.html', context=content)
+	return get_products(request, categories_id)
 
 def about(request):
 	return render(request, 'shop/about.html', context=None)

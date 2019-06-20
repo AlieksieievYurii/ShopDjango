@@ -2,11 +2,17 @@
 
 {% block content %}
 <div>
+    <h3>Category:</h3>
+    <h4>{{ category }}</h4>
     <h1>{{ product_name }}</h1>
     <img class="card-img-top" src="/static/shop/img/{{ img_url }}" alt="Product photo">
     <div class="product__card__title">
     <h5 class="card-title">{{product_name}}</h5>
     <p class="productCard__description">{{product_description}}</p>
+    <div>
+        <p>Available</p>
+        <p>{{ product_count }}</p>
+    </div>
     <div class="product__card__add">
         <p>${{price}}</p>
         <form action="/add_to_cart/{{item.id}}" method='POST'>
