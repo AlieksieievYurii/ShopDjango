@@ -42,9 +42,9 @@ def add_to_cart(request, goods_id: int):
 def remove_from_cart(request, goods_id: int):
 	g = models.Product.objects.get(id=goods_id)
 
-	cart = models.Cart.objects.get(goods=g)
+	cart = models.Cart.objects.get(product=g)
 	cart.delete()
-	return HttpResponseRedirect('/open_cart/')
+	return HttpResponseRedirect('/cart/')
 
 
 def detail(request, goods_id: int):
@@ -76,7 +76,7 @@ def cart(request):
 
 
 def order(request):
-	pass
+	return render(request, 'shop/order.html')
 
 
 def categories(request, categories_id: int):
