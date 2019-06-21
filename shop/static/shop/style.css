@@ -200,6 +200,5 @@ a.article:hover {
 
 .cart_item
 {
-    background-color: yellow;
-    display: inline;
+    display: inline-block;
 }
