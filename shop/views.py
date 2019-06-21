@@ -76,6 +76,7 @@ def cart(request):
 
 
 def order(request):
+	models.Cart.objects.all().delete()
 	return render(request, 'shop/order.html')
 
 
