@@ -9,10 +9,17 @@
 		<h4>Count:{{ item.product.count }}</h4>
 		<h4>Price for one: {{ item.product.product.price }}</h4>
 		<h4>Price for {{ item.count }}: {{ item.price_for_all }}</h4>
+		<form action="/remove_from_cart/{{ item.product.product.id }}/" method='DELETE'>
+			{% csrf_token %}
+        	<button class="btn btn-primary" type='submit'>Remove</button>
+        </form>
 	</div>
 {% endfor %}
 
 <div>
 	<p>Summa:{{ summa }}</p>
+	<form action="/order/" method='GET'>
+        	<button class="btn btn-primary" type='submit'>Order</button>
+    </form>
 </div>
 {% endblock content %}
