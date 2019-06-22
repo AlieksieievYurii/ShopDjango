@@ -77,7 +77,7 @@ def cart(request):
 
 def order(request):
 	if request.method == 'POST':
-		models.Cart.objects.all().delete()
+		cart = models.Cart.objects.all().delete()
 		return render(request, 'shop/order.html')
 	else:
 		raise Exception('Wrong request!')
