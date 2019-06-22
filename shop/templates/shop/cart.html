@@ -18,8 +18,9 @@
 
 <div>
 	<p>Summa:{{ summa }}</p>
-	<form action="/order/" method='GET'>
-        	<button class="btn btn-primary" type='submit'>Order</button>
+	<form action="/order/" method='POST'>
+		{% csrf_token %}
+        <button class="btn btn-primary" type='submit'>Order</button>
     </form>
 </div>
 {% endblock content %}
