@@ -68,15 +68,16 @@
                         <span>Shop WSINF</span>
                     </button>
                    
-                        <div style="display: inline">
-                            {% if count_goods_in_cart %}
-                                <h4>{{ count_goods_in_cart }} items</h4>
-                            {% else %}
-                                <h4>cart is empty</h4>
-                            {% endif %}
+                        <div class="navbar__cart">
                             <form action="/cart/" method="GET" class="btn">
-                                <input type="submit" name="Cart" value="Cart"> 
+                                <button type="submit" name="Cart" value="Cart"> Lol</button>
                             </form>
+
+                            {% if count_goods_in_cart %}
+                                <p>{{ count_goods_in_cart }} items</p>
+                            {% else %}
+                                <p>cart is empty</p>
+                            {% endif %}
                         </div>
                     </div>
             </nav>

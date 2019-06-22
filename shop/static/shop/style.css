@@ -38,6 +38,19 @@ a:focus {
     outline: none !important;
     border: none;
 }
+.navbar__cart {
+    
+}
+.navbar__cart button {
+    cursor: pointer;
+    color: transparent;
+    background-color: transparent;
+    border: none;
+    background-image: url("/static/shop/img/shopping_cart.svg");
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-size: cover;
+}
 
 .line {
     width: 100%;
