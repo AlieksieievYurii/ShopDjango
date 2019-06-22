@@ -210,7 +210,17 @@ a.article:hover {
 
 .cart_item
 {
-    display: inline-block;
+    display: flex;
+    padding: 5px;
+    border-bottom: 1px solid #d6d6d6;
+    margin: 5px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border-radius: 5px;
+    width: 100%;
+}
+.cart_item img {
+    border-radius: 5px;
 }
 
 .detail__container 
@@ -239,4 +249,58 @@ a.article:hover {
 .detail__description span {
     font-weight: 600;
     color: black;
+}
+
+.shopCard__items {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.cartItem__detail {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.cartItem__productDescription {
+
+}
+.cartItem__productDescription span {
+    color:black;
+    font-weight: 400;
+}
+
+.cartItem__productsPrice {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.cartItem__productsPrice p {
+    margin: 0px;
+}
+
+.cartItem__name {
+    font-size: 1.25rem;
+    color: rgb(59, 109, 154);
+}
+
+.cardSumma__container {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 15px;
+    padding-right: 30px;
+}
+.card__summa span {
+}
+.card__summa span {
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: black;
+}
+
+.card__summa button {
+    width: 100%;
 }

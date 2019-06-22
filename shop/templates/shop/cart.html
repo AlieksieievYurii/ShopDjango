@@ -1,30 +1,41 @@
 {% extends "shop/base_template.html" %}
 {% load static %}
 {% block content %}
-<h1>Cart</h1>
-{% for item in products %}
-	<div class="cart_item" style="display: inline-block;">
-		<img src="{% static 'shop/img/' %}{{ item.product.product.img }}" width="10%" height="10%">
-		<h3>{{ item.product.product.name }}</h3>
-		<h4>Count:{{ item.product.count }}</h4>
-		<h4>Price for one: {{ item.product.product.price }}</h4>
-		<h4>Price for {{ item.count }}: {{ item.price_for_all }}</h4>
-		<form action="/remove_from_cart/{{ item.product.product.id }}/" method='POST'>
-			{% csrf_token %}
-        	<button class="btn btn-primary" type='submit'>Remove</button>
-        </form>
+<div class="shopCard">
+	<h1>Cart</h1>
+	<div class="shopCard__items">
+	{% for item in products %}
+		<div class="cart_item">
+			<img src="{% static 'shop/img/' %}{{ item.product.product.img }}" width="10%" height="10%">
+			<div class="cartItem__detail">
+				<div class="cartItem__productDescription">
+					<a class="cartItem__name" href="/detail/{{ item.product.product.id }}/">{{ item.product.product.name }}</a>
+					<p class="">Price: <span>${{ item.product.product.price }}</span></p>
+				</div>
+				<div class="cartItem__productsPrice">
+					<form action="/remove_from_cart/{{ item.product.product.id }}/" method='POST'>
+						{% csrf_token %}
+						<button class="btn btn-outline-danger" type='submit'>Remove</button>
+					</form>
+					<p>Count: <span>{{ item.product.count }}</span></p>
+					<h5>${{ item.price_for_all }}</h5>
+				</div>
+			</div>
+		</div>
+	{% endfor %}
 	</div>
-{% endfor %}
-
-{% if products %}
-<div>
-	<p>Summa:{{ summa }}</p>
-	<form action="/order/" method='POST'>
-		{% csrf_token %}
-        <button class="btn btn-primary" type='submit'>Order</button>
-    </form>
+	{% if products %}
+	<div class="cardSumma__container">
+		<div class="card__summa">
+			<p>Summa:  <span>${{ summa }}</span></p>
+			<form action="/order/" method='POST'>
+				{% csrf_token %}
+				<button class="btn btn-success" type='submit'>Order</button>
+			</form>
+		</div>
+	</div>
+	{% else %}
+	<h1>You cart is empty!</h1>
+	{% endif %}
+	{% endblock content %}
 </div>
-{% else %}
-<h1>You cart is empty!</h1>
-{% endif %}
-{% endblock content %}
