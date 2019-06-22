@@ -2,25 +2,28 @@
 
 {% block content %}
 <div>
-    <h3>Category:</h3>
-    <h4>{{ category }}</h4>
-    <h1>{{ product.name }}</h1>
-    <img class="card-img-top" src="/static/shop/img/{{ product.img }}" alt="Product photo">
-    <div class="product__card__title">
-    <p class="productCard__description">{{product.description}}</p>
-    <div>
-        <p>Available</p>
-        <p>{{ product.available_count }}</p>
+    <h5>Category: {{ category }}</h5>
+    <h2>{{ product.name }}</h2>
+    <div class="detail__container">
+        <div class="detail__image" style="background-image: url(/static/shop/img/{{ product.img }})" ></div>
+        <div class="detail__description" >
+            <p>{{product.description}}</p>
+            <div>
+                <p>Available <span>{{ product.available_count }}</span></p>
+            </div>
+            {% if is_in_cart %}
+                <p>You have already {{ count_in_cart }}</p>
+            {% endif %}
+            <div class="product__card__add">
+                <h5>${{product.price}}</h5>
+                <form action="/add_to_cart/{{product.id}}/" method='POST'>
+                    {% csrf_token %}
+                    <button class="btn btn-primary" type='submit'>Add to card</button>
+                </form>
+            </div>
+        </div>    
     </div>
-    {% if is_in_cart %}
-        <p>You have already {{ count_in_cart }}</p>
-    {% endif %}
-    <div class="product__card__add">
-        <p>${{product.price}}</p>
-        <form action="/add_to_cart/{{product.id}}/" method='POST'>
-            {% csrf_token %}
-            <button class="btn btn-primary" type='submit'>Add to card</button>
-        </form>
+    <div class="product__card__title">
     </div>
 </div>
 

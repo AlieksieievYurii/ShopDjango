@@ -2,11 +2,11 @@
 {% load static %}
 {% block content %}
 <div>
-  <div class="product__container">
     {% if category %}
       <h1>{{category}}</h1>
       <br>
     {% endif %}
+  <div class="product__container">
     {% for item in products %}
       <div class="product__card">
         <div class="card" style="width: 18rem;">

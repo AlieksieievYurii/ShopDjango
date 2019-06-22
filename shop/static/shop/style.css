@@ -180,7 +180,7 @@ a.article:hover {
     width: 100%;
     background-repeat: no-repeat;
     background-position: 50%;
-    background-size: contain;
+    background-size: cover;
 }
 
 .product__card {
@@ -211,4 +211,32 @@ a.article:hover {
 .cart_item
 {
     display: inline-block;
+}
+
+.detail__container 
+{
+    display: flex;
+    justify-content: flex-start;
+}
+.detail__image {
+    height: 300px;
+    width: 33%;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-size: cover;
+    border-radius: 10px;
+    max-width: 350px;
+}
+.detail__description {
+    width: 50%;
+    padding-left: 40px;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 0px;        
+}
+.detail__description span {
+    font-weight: 600;
+    color: black;
 }
