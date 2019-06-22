@@ -12,8 +12,19 @@ def get_products(request, categories_id=None):
 		products = models.Product.objects.filter(category=category)
 	else:
 		products = models.Product.objects.order_by('?')
+
+	_products = []
+	for p in products:
+		pr = {'product': p}
+		_p = models.Cart.objects.filter(product=p).first()
+		if _p:
+			pr['is_in_cart'] = True
+			pr['count'] = _p.count
+		else:
+			pr['is_in_cart'] = False
+		_products.append(pr)
 	content = {
-		'goods': products,
+		'products': _products,
 		'title': category.name if category else 'Shop',
 		'category': category.name if category else None,
 		'categories': models.Category.objects.all(),
@@ -48,13 +59,21 @@ def remove_from_cart(request, goods_id: int):
 
 
 def detail(request, goods_id: int):
+	p = models.Product.objects.get(id=goods_id)
 	content = {
 		'title': 'Details',
-		'product': models.Product.objects.get(id=goods_id),
+		'product': p,
 		'categories': models.Category.objects.all(),
 		'count_goods_in_cart': models.Cart.objects.all().count(),
 		'category': models.Product.objects.get(id=goods_id).category.name
 	}
+
+	_p = models.Cart.objects.filter(product=p).first()
+	if _p:
+		content['is_in_cart'] = True
+		content['count_in_cart'] = _p.count
+	else:
+		content['is_in_cart'] = False
 	return render(request, 'shop/detail.html', context=content)
 
 

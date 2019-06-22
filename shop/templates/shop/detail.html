@@ -12,6 +12,9 @@
         <p>Available</p>
         <p>{{ product.available_count }}</p>
     </div>
+    {% if is_in_cart %}
+        <p>You have already {{ count_in_cart }}</p>
+    {% endif %}
     <div class="product__card__add">
         <p>${{product.price}}</p>
         <form action="/add_to_cart/{{product.id}}/" method='POST'>
