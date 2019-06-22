@@ -10,7 +10,8 @@
     {% for item in products %}
       <div class="product__card">
         <div class="card" style="width: 18rem;">
-          <img class="card-img-top" src="{% static 'shop/img/' %}{{ item.product.img }}" alt="Product photo">
+          {% comment %} <img class="card-img-top" src="{% static 'shop/img/' %}{{ item.img }}" alt="Product photo"> {% endcomment %}
+          <div class="product__image" style="background-image: url({% static 'shop/img/' %}{{ item.img }})" ></div>
           <div class="product__card__title">
             <h5 class="card-title">{{item.product.name}}</h5>
             <p class="productCard__description">{{item.product.description}}</p>
