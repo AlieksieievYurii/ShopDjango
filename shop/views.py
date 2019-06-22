@@ -40,10 +40,10 @@ def add_to_cart(request, goods_id: int):
 
 
 def remove_from_cart(request, goods_id: int):
-	g = models.Product.objects.get(id=goods_id)
-
-	cart = models.Cart.objects.get(product=g)
-	cart.delete()
+	if request.method == 'POST':
+		product = models.Product.objects.get(id=goods_id)
+		cart = models.Cart.objects.get(product=product)
+		cart.delete()
 	return HttpResponseRedirect('/cart/')
 
 
@@ -76,8 +76,11 @@ def cart(request):
 
 
 def order(request):
-	models.Cart.objects.all().delete()
-	return render(request, 'shop/order.html')
+	if request.method == 'POST':
+		models.Cart.objects.all().delete()
+		return render(request, 'shop/order.html')
+	else:
+		raise Exception('Wrong request!')
 
 
 def categories(request, categories_id: int):
