@@ -21,7 +21,7 @@ a:hover,
 a:focus {
     color: inherit;
     text-decoration: none;
-    transition: all 0.3s;
+    transition: all 0.1s;
 }
 
 .navbar {
@@ -72,9 +72,8 @@ a:focus {
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: #7386D5;
-    color: #fff;
-    transition: all 0.3s;
+    background: #fff;
+    color: #cd2e3b;
 }
 
 #sidebar.active {
@@ -82,35 +81,40 @@ a:focus {
 }
 
 #sidebar .sidebar-header {
-    padding: 20px;
-    background: #6d7fcc;
-}
-
-#sidebar ul.components {
     padding: 20px 0;
+    background: #cd2e3b;
+}
+#sidebar .sidebar-header a{
+    color: #fff;
+
+}
+#sidebar ul.components {
     border-bottom: 1px solid #47748b;
 }
 
 #sidebar ul p {
-    color: #fff;
+    background: #cd2e3b !important;
+    color: #fff !important;
     padding: 10px;
 }
 
 #sidebar ul li a {
+    background: #cd2e3b !important;
+    color: #fff !important;
     padding: 10px;
     font-size: 1.1em;
     display: block;
 }
 
 #sidebar ul li a:hover {
-    color: #7386D5;
-    background: #fff;
+    background: #fff !important;
+    color: #cd2e3b !important;
 }
 
 #sidebar ul li.active>a,
 a[aria-expanded="true"] {
     color: #fff;
-    background: #6d7fcc;
+    background: #cd2e3b;
 }
 
 a[data-toggle="collapse"] {
@@ -128,7 +132,7 @@ a[data-toggle="collapse"] {
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
-    background: #6d7fcc;
+    background: #cd2e3b;
 }
 
 ul.CTAs {
@@ -145,12 +149,12 @@ ul.CTAs a {
 
 a.download {
     background: #fff;
-    color: #7386D5;
+    color: #d8495a;
 }
 
 a.article,
 a.article:hover {
-    background: #6d7fcc !important;
+    background: #cd2e3b !important;
     color: #fff !important;
 }
 
@@ -162,7 +166,7 @@ a.article:hover {
     width: 100%;
     padding: 20px;
     min-height: 100vh;
-    transition: all 0.3s;
+    transition: all 0.1s;
 }
 
 /* ---------------------------------------------------
@@ -342,5 +346,24 @@ a.article:hover {
     background-repeat: no-repeat;
     background-position: 50%;
     background-size: cover;
+}
 
+.contact p{
+    color: black;
+}
+
+
+.logo-icon {
+    display: block;
+    height: 100px;
+    background-image: url("/static/shop/img/logo.png");
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-size: cover;
+}
+
+#sidebarCollapse {
+    background-color: transparent;
+    color: black;
+    border-color: #0069d9;
 }
