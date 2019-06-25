@@ -106,8 +106,16 @@ def categories(request, categories_id: int):
 	return get_products(request, categories_id)
 
 def about(request):
-	return render(request, 'shop/about.html', context={'count_goods_in_cart': models.Cart.objects.all().count()})
+	content={
+	'count_goods_in_cart': models.Cart.objects.all().count(),
+	'categories': models.Category.objects.all()
+	}
+	return render(request, 'shop/about.html', context=content)
 
 
 def contacts(request):
-	return render(request, 'shop/contacts.html', context={'count_goods_in_cart': models.Cart.objects.all().count()})
+	content={
+	'count_goods_in_cart': models.Cart.objects.all().count(),
+	'categories': models.Category.objects.all()
+	}
+	return render(request, 'shop/contacts.html', context=content)
