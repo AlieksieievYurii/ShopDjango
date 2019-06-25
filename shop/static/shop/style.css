@@ -317,3 +317,30 @@ a.article:hover {
 .card__summa button {
     width: 100%;
 }
+
+.order {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+}
+
+.order-icon__container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 25px;
+}
+.order-done {
+    height: 100px;
+    width: 100px;
+    background-image: url("/static/shop/img/done.svg");
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-size: cover;
+
+}
