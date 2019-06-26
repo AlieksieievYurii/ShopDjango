@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from . import models
+from django.db.models import Q
 from django.core.exceptions import ObjectDoesNotExist
 # Create your views here.
 
-def get_products(request, categories_id=None):
+def get_products(request, categories_id: int = None, key_words: str = None):
 	products = None
 	category = None
 	if categories_id is not None:
@@ -12,6 +13,10 @@ def get_products(request, categories_id=None):
 		products = models.Product.objects.filter(category=category)
 	else:
 		products = models.Product.objects.order_by('?')
+
+	if key_words:
+		products = products.filter(Q(name__contains=key_words) | 
+			Q(description__contains=key_words))
 
 	_products = []
 	for p in products:
@@ -35,7 +40,7 @@ def get_products(request, categories_id=None):
 
 
 def index(request):
-	return get_products(request)
+	return get_products(request, key_words=request.GET.get('key_words', None))
 
 
 def add_to_cart(request, goods_id: int):
